@@ -85,13 +85,13 @@ class Template_sync_ext
 		ee()->load->library('template_sync_lib');
 		$lib = ee()->template_sync_lib;
 
-		// Get the file templates from the filesystem
+		// Get the file templates from the file system
 		$fileTemplates = $lib->getFileTemplates();
 
 		// Get the templates from the database
 		$dbTemplates = $model->getDbTemplates();
 
-		// Get the typemap array to map file extensions to template type
+		// Get the typeMap array to map file extensions to template type
 		$typeMap = $lib->typeMap;
 
 		// Start arrays
@@ -102,6 +102,8 @@ class Template_sync_ext
 
 		// Loop through the database template groups
 		foreach($dbTemplates as $dbTemplate) {
+			// If the template group is not in the file system, add group to
+			// delete array and go to next loop iteration
 			if (! isset($fileTemplates[$dbTemplate['group_name']])) {
 				$groupDelete[] = $dbTemplate['group_id'];
 
@@ -113,14 +115,15 @@ class Template_sync_ext
 
 			// Loop through the templates in this group
 			foreach($dbTemplate['templates'] as $template) {
-				// If the template is not in file system, add tempalte to delete
-				// array and go to next loop itteration
+				// If the template is not in file system, add template to delete
+				// array and go to next loop iteration
 				if (! isset($fileGroupTemplates[$template['template_name']])) {
 					$templateDelete[] = $template['template_id'];
 
 					continue;
 				}
 
+				// Set the file system template type
 				$ext = $fileGroupTemplates[$template['template_name']]['extension'];
 				$fileType = $typeMap[$ext];
 
@@ -149,7 +152,8 @@ class Template_sync_ext
 		}
 
 		/**
-		 * Check template group order and update if necesary
+		 * Check if DB template group order is alphabetical and update
+		 * if necessary
 		 */
 
 		// Set the order of the file template groups

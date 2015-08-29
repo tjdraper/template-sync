@@ -50,7 +50,6 @@ class Template_sync_lib
 			$templateGroupName = rtrim($templateGroup, '.group');
 
 			// Set the templates for the group to an array
-			// $returnFileTemplates[$templateGroupName]['templates'] = array();
 			$finalTemplates = array();
 
 			// Get the templates in this group
