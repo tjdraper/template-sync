@@ -1,6 +1,6 @@
 # Template Sync 1.0.0-b.1 for ExpressionEngine
 
-ExpressionEngine has basic capability for files as templates, but if you delete a template file from the file system it is not deleted, or if you change the file extension, it does not change the template type in EE. This extension fixes both of those issues.
+ExpressionEngine has basic capability for files as templates, but if you delete a template file from the file system it is not deleted from EE, or if you change the file extension, it does not change the template type in EE. This extension fixes both of those issues.
 
 ## How it works
 
