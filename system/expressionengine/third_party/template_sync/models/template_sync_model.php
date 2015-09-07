@@ -27,6 +27,7 @@ class Template_sync_model extends CI_Model
 
 		foreach ($templateGroupsQuery as $key => $templateGroup) {
 			$templateGroups[$templateGroup['group_id']] = $templateGroup;
+
 			$templateGroups[$templateGroup['group_id']]['templates'] = array();
 		}
 
@@ -59,6 +60,7 @@ class Template_sync_model extends CI_Model
 		}
 
 		ee()->db->where_in('group_id', $groupDelete);
+
 		ee()->db->delete(array(
 			'templates',
 			'template_groups'
@@ -77,6 +79,7 @@ class Template_sync_model extends CI_Model
 		}
 
 		ee()->db->where_in('template_id', $templateIds);
+
 		ee()->db->delete('templates');
 	}
 

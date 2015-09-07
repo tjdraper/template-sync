@@ -80,9 +80,9 @@ class Template_sync_ext
 	private function proceedWithSync()
 	{
 		ee()->load->model('template_sync_model');
-		$model = ee()->template_sync_model;
-
 		ee()->load->library('template_sync_lib');
+
+		$model = ee()->template_sync_model;
 		$lib = ee()->template_sync_lib;
 
 		// Get the file templates from the file system
@@ -96,12 +96,15 @@ class Template_sync_ext
 
 		// Start arrays
 		$groupDelete = array();
+
 		$templateDelete = array();
+
 		$update = array();
+
 		$i = 0;
 
 		// Loop through the database template groups
-		foreach($dbTemplates as $dbTemplate) {
+		foreach ($dbTemplates as $dbTemplate) {
 			// If the template group is not in the file system, add group to
 			// delete array and go to next loop iteration
 			if (! isset($fileTemplates[$dbTemplate['group_name']])) {
@@ -114,7 +117,7 @@ class Template_sync_ext
 			$fileGroupTemplates = $fileTemplates[$dbTemplate['group_name']];
 
 			// Loop through the templates in this group
-			foreach($dbTemplate['templates'] as $template) {
+			foreach ($dbTemplate['templates'] as $template) {
 				// If the template is not in file system, add template to delete
 				// array and go to next loop iteration
 				if (! isset($fileGroupTemplates[$template['template_name']])) {
@@ -125,12 +128,15 @@ class Template_sync_ext
 
 				// Set the file system template type
 				$ext = $fileGroupTemplates[$template['template_name']]['extension'];
+
 				$fileType = $typeMap[$ext];
 
 				// Add the template type to the update array if not a match
 				if ($template['template_type'] !== $fileType) {
 					$update[$i]['template_id'] = $template['template_id'];
+
 					$update[$i]['template_type'] = $typeMap[$ext];
+
 					$i++;
 				}
 			}
@@ -164,16 +170,17 @@ class Template_sync_ext
 
 		// Set the current order of the DB templates
 		$dbGroupOrder = array();
-		foreach($dbTemplates as $dbGroup) {
+		foreach ($dbTemplates as $dbGroup) {
 			$dbGroupOrder[] = $dbGroup['group_name'];
 		}
 
 		// Check the order
-		foreach($fileGroupOrder as $key => $fileOrder) {
+		foreach ($fileGroupOrder as $key => $fileOrder) {
 			// If the template names do not match, the DB templates are out
 			// of order
 			if ((isset($dbGroupOrder[$key]) && $dbGroupOrder[$key]) !== $fileOrder) {
 				$i = 0;
+
 				$order = array();
 
 				// Set the correct order
@@ -181,14 +188,18 @@ class Template_sync_ext
 					foreach ($dbTemplates as $dbGroup) {
 						if ($dbGroup['group_name'] === $fileGroup) {
 							$order[$i]['group_id'] = $dbGroup['group_id'];
+
 							$order[$i]['group_order'] = $i + 1;
+
 							$i++;
+
 							break;
 						}
 					}
 				}
 
 				$model->updateTemplateGroups($order);
+
 				break;
 			}
 		}
