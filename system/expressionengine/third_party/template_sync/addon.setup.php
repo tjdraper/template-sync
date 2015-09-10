@@ -2,7 +2,7 @@
 
 if (! defined('TEMPLATE_SYNC_NAME')) {
 	define('TEMPLATE_SYNC_NAME', 'Template Sync');
-	define('TEMPLATE_SYNC_VER', '1.0.0-b.2');
+	define('TEMPLATE_SYNC_VER', '1.0.0-b.3');
 	define('TEMPLATE_SYNC_AUTHOR', 'TJ Draper');
 	define('TEMPLATE_SYNC_AUTHOR_URL', 'https://buzzingpixel.com');
 	define('TEMPLATE_SYNC_DESC', 'Delete templates not in the file system');

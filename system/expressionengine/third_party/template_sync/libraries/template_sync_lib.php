@@ -45,9 +45,17 @@ class Template_sync_lib
 		// Get template groups from file system
 		$templateGroups = $this->dirArray($path, true);
 
+		// Make sure items are alphabetical
+		sort($templateGroups);
+
 		foreach ($templateGroups as $templateGroup) {
 			// Get the name of the template group
 			$templateGroupName = rtrim($templateGroup, '.group');
+
+			// Write an index template if it does not exist
+			if (! file_exists($path . $templateGroup . '/index.html')) {
+				$this->writeIndexTemplate($path . $templateGroup . '/');
+			}
 
 			// Set the templates for the group to an array
 			$finalTemplates = array();
@@ -79,6 +87,14 @@ class Template_sync_lib
 		}
 
 		return $returnFileTemplates;
+	}
+
+	public function writeIndexTemplate($groupPath)
+	{
+		file_put_contents(
+			$groupPath . 'index.html',
+			'{redirect="404"}'
+		);
 	}
 
 	/**
