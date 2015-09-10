@@ -43,7 +43,7 @@ class Template_sync_lib
 			ee()->config->item('site_short_name') . '/';
 
 		// Get template groups from file system
-		$templateGroups = $this->dirArray($path);
+		$templateGroups = $this->dirArray($path, true);
 
 		foreach ($templateGroups as $templateGroup) {
 			// Get the name of the template group
@@ -87,13 +87,21 @@ class Template_sync_lib
 	 * @param string $path
 	 * @return array
 	 */
-	public function dirArray($path)
+	public function dirArray($path, $dirOnly = false)
 	{
 		$dir = scandir($path);
 
 		unset($dir[0]);
 
 		unset($dir[1]);
+
+		if ($dirOnly) {
+			foreach ($dir as $key => $val) {
+				if (! is_dir($path . $val)) {
+					unset($dir[$key]);
+				}
+			}
+		}
 
 		return array_values($dir);
 	}
