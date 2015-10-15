@@ -40,6 +40,15 @@ class Template_sync_ext
 	 */
 	public function update_extension($current = '')
 	{
+		if ($current !== $this->version) {
+			ee()->db->where('class', __CLASS__);
+			ee()->db->update('extensions', array(
+				'version' => $this->version
+			));
+
+			return true;
+		}
+
 		return false;
 	}
 

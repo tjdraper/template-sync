@@ -39,8 +39,13 @@ class Template_sync_lib
 		$returnFileTemplates = array();
 
 		// Set path
-		$path = rtrim(ee()->config->item('tmpl_file_basepath'), '/') . '/' .
-			ee()->config->item('site_short_name') . '/';
+		if (version_compare(APP_VER, '3.0.0', '>=')) {
+			$templateBasePath = SYSPATH . 'user/templates/';
+		} else {
+			$templateBasePath = rtrim(ee()->config->item('tmpl_file_basepath'), '/') . '/';
+		}
+
+		$path = $templateBasePath . ee()->config->item('site_short_name') . '/';
 
 		// Get template groups from file system
 		$templateGroups = $this->dirArray($path, true);
