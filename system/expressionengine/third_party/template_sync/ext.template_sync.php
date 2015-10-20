@@ -1,8 +1,5 @@
 <?php if (! defined('BASEPATH')) exit('No direct script access allowed');
 
-// Include configuration
-include_once(PATH_THIRD . 'template_sync/addon.setup.php');
-
 /**
  * Template Sync extension
  *
@@ -13,26 +10,30 @@ include_once(PATH_THIRD . 'template_sync/addon.setup.php');
 
 class Template_sync_ext
 {
-	public $name = TEMPLATE_SYNC_NAME;
 	public $version = TEMPLATE_SYNC_VER;
-	public $description = TEMPLATE_SYNC_DESC;
-	public $docs_url = '';
-	public $settings_exist = 'n';
+
+	protected $info;
+
+	public function __construct()
+	{
+		$this->info = ee('App')->get('template_sync');
+	}
 
 	/**
 	 * Activate extension
 	 */
 	public function activate_extension()
 	{
-		ee()->db->insert('extensions', array(
+		$extension = ee('Model')->make('Extension');
+
+		$extension->set(array(
 			'class' => __CLASS__,
 			'method' => 'sync_templates',
 			'hook' => 'sessions_start',
-			'settings' => '',
-			'priority' => 10,
-			'version' => $this->version,
-			'enabled' => 'y'
+			'version' => $this->info->getVersion()
 		));
+
+		$extension->save();
 	}
 
 	/**
@@ -40,13 +41,14 @@ class Template_sync_ext
 	 */
 	public function update_extension($current = '')
 	{
-		if ($current !== $this->version) {
-			ee()->db->where('class', __CLASS__);
-			ee()->db->update('extensions', array(
-				'version' => $this->version
-			));
+		if ($current !== $this->info->getVersion()) {
+			$extension = ee('Model')->get('Extension')
+				->filter('class', __CLASS__)
+				->all();
 
-			return true;
+			$extension->version = $this->info->getVersion();
+
+			$extension->save();
 		}
 
 		return false;
@@ -57,8 +59,11 @@ class Template_sync_ext
 	 */
 	public function disable_extension()
 	{
-		ee()->db->where('class', __CLASS__);
-		ee()->db->delete('extensions');
+		$extension = ee('Model')->get('Extension')
+			->filter('class', __CLASS__)
+			->all();
+
+		$extension->delete();
 	}
 
 	/**

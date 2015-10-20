@@ -1,22 +1,12 @@
 <?php
 
-if (! defined('TEMPLATE_SYNC_NAME')) {
-	define('TEMPLATE_SYNC_NAME', 'Template Sync');
-	define('TEMPLATE_SYNC_VER', '1.0.0-b.4');
-	define('TEMPLATE_SYNC_AUTHOR', 'TJ Draper');
-	define('TEMPLATE_SYNC_AUTHOR_URL', 'https://buzzingpixel.com');
-	define('TEMPLATE_SYNC_DESC', 'Delete templates not in the file system');
-	define('TEMPLATE_SYNC_PATH', PATH_THIRD . 'template_sync/');
-}
-
-$config['name'] = TEMPLATE_SYNC_NAME;
-$config['version'] = TEMPLATE_SYNC_VER;
+defined('TEMPLATE_SYNC_VER') || define('TEMPLATE_SYNC_VER', '1.0.0-b.5');
 
 return array(
-	'name' => TEMPLATE_SYNC_NAME,
+	'name' => 'Template Sync',
 	'version' => TEMPLATE_SYNC_VER,
-	'author' => TEMPLATE_SYNC_AUTHOR,
-	'author_url' => TEMPLATE_SYNC_AUTHOR_URL,
-	'description' => TEMPLATE_SYNC_DESC,
+	'author' => 'TJ Draper',
+	'author_url' => 'https://buzzingpixel.com',
+	'description' => 'Provide full, two way sync for templates in the database and filesystem',
 	'namespace' => 'BuzzingPixel\TemplateSync'
 );
