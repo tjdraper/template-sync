@@ -44,7 +44,17 @@ class FileTemplates
 			$templateGroupName = $groupPathInfo['filename'];
 
 			// Write an index template if it does not exist
-			if (! file_exists($path . $templateGroup . '/index.html')) {
+			$writeIndex = true;
+
+			foreach ($fileExtensions as $ext) {
+				if (file_exists($path . $templateGroup . '/index.' . $ext)) {
+					$writeIndex = false;
+
+					break;
+				}
+			}
+
+			if ($writeIndex) {
 				file_put_contents(
 					$path . $templateGroup . '/' . 'index.html',
 					'{redirect="404"}'
