@@ -28,7 +28,7 @@ class Template_sync_ext
 
 		$extension->set(array(
 			'class' => __CLASS__,
-			'method' => 'sync_templates',
+			'method' => 'sync',
 			'hook' => 'sessions_start',
 			'version' => $this->info->getVersion()
 		));
@@ -69,7 +69,7 @@ class Template_sync_ext
 	/**
 	 * Sync templates (sessions_start)
 	 */
-	public function sync_templates()
+	public function sync()
 	{
 		// Check to see if we should be syncing templates
 		if ((defined('ENV') && ENV !== 'prod') || REQ === 'CP') {
