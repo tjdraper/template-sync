@@ -13,6 +13,7 @@ return array(
 		// Controllers
 		'SyncTemplatesController' => 'Controller\SyncTemplates',
 		'SyncSpecTemplatesController' => 'Controller\SyncSpecTemplates',
+		'SyncPartialsController' => 'Controller\SyncPartials',
 
 		// Services
 		'FileTemplatesService' => 'Service\FileTemplates',
@@ -20,6 +21,8 @@ return array(
 		'TemplateCompareService' => 'Service\TemplateCompare',
 		'SpecFileTemplatesService' => 'Service\SpecFileTemplates',
 		'DbSpecTemplatesService' => 'Service\DbSpecTemplates',
+		'PartialFileTemplatesService' => 'Service\PartialFileTemplates',
+		'SyncPartialsService' => 'Service\SyncPartials',
 
 		// Libraries
 		'FileTemplateExtensionsLib' => 'Library\FileTemplateExtensions',

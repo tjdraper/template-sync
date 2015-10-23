@@ -83,6 +83,10 @@ class Template_sync_ext
 			if (ee()->config->item('template_sync_disable_spec_sync') !== 'y') {
 				ee('template_sync:SyncSpecTemplatesController')->run();
 			}
+
+			if (ee()->config->item('template_sync_disable_partial_sync') !== 'y') {
+				ee('template_sync:SyncPartialsController')->run();
+			}
 		}
 	}
 }
