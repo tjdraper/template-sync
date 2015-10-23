@@ -5,14 +5,17 @@ namespace BuzzingPixel\Addons\TemplateSync\Service;
 class PartialFileTemplates
 {
 	private $returnTemplates = array();
+	private $namespace = '';
 
 	/**
 	 * Get partial file templates from file system
 	 *
 	 * @return array
 	 */
-	public function get($path)
+	public function get($path, $namespace = '')
 	{
+		$this->namespace = $namespace;
+
 		// Set variables
 		$templateBasePath = SYSPATH . 'user/templates/';
 		$path = $templateBasePath . ee()->config->item('site_short_name') .
@@ -26,7 +29,12 @@ class PartialFileTemplates
 		// Recursively load files
 		$this->processRecursively($path);
 
-		return $this->returnTemplates;
+		// Reset for next use
+		$returnTemplates = $this->returnTemplates;
+		$this->returnTemplates = array();
+		$this->namespace = '';
+
+		return $returnTemplates;
 	}
 
 	/**
@@ -55,7 +63,7 @@ class PartialFileTemplates
 
 			// Make sure hidden files (starting with .) are not included
 			if ($pathInfo['filename']) {
-				$this->returnTemplates[$prefix . $pathInfo['filename']] = $content;
+				$this->returnTemplates[$this->namespace . $prefix . $pathInfo['filename']] = $content;
 			}
 		}
 	}

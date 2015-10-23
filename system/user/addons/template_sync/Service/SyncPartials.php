@@ -14,7 +14,7 @@ class SyncPartials
 	public function run($model, $data)
 	{
 		$name = $model === 'Snippet' ? 'snippet_name' : 'variable_name';
-		$content = $model == 'Snippet' ? 'snippet_contents' : 'variable_data';
+		$content = $model === 'Snippet' ? 'snippet_contents' : 'variable_data';
 
 		// Get existing partials
 		$partials = ee('Model')->get($model)->all();

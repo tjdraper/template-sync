@@ -13,10 +13,10 @@ class SyncPartials
 		$partialSyncService = ee('template_sync:SyncPartialsService');
 
 		// Get partials
-		$partials = $partialFileService->get('partials');
+		$partials = $partialFileService->get('partials', 'partial:');
 
 		// Get variables
-		$variables = $partialFileService->get('variables');
+		$variables = $partialFileService->get('variables', 'variable:');
 
 		// Sync partials
 		$partialSyncService->run('Snippet', $partials);
