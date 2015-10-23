@@ -13,8 +13,10 @@ class DbTemplates
 	{
 		// Set variables
 		$templateGroupsDB = ee('Model')->get('TemplateGroup')
+			->with('Templates')
 			->order('group_order', 'ASC')
 			->all();
+
 		$templateGroups = array();
 
 		// Loop through the template groups
@@ -24,13 +26,18 @@ class DbTemplates
 			// Set the array of properties to the templateGroups array
 			$templateGroups[$id] = $templateGroup->toArray();
 
-			// This Model is not currently working. Waiting on EllisLab to work
-			// it out
-			// var_dump($templateGroup->Templates);
-		}
+			// Attach templates
+			foreach ($templateGroup->Templates as $templateDB) {
+				$template = array(
+					'template_id' => $templateDB->template_id,
+					'group_id' => $templateDB->group_id,
+					'template_name' => $templateDB->template_name,
+					'template_type' => $templateDB->template_type
+				);
 
-		// Temp, get templates the old way because the model is not working
-		$templateGroups = $this->attachTemplates($templateGroups);
+				$templateGroups[$id]['templates'][$templateDB->template_id] = $template;
+			}
+		}
 
 		return $templateGroups;
 	}
@@ -42,19 +49,10 @@ class DbTemplates
 	 */
 	public function deleteGroups($ids)
 	{
-		// The model is currently broken
-		//$templateGroups = ee('Model')->get('TemplateGroup')
-		//	->filter('group_id', 'IN', $ids)
-		//	->all();
-		//
-		//$templateGroups->delete();
-
-		ee()->db->where_in('group_id', $ids);
-
-		ee()->db->delete(array(
-			'templates',
-			'template_groups'
-		));
+		ee('Model')->get('TemplateGroup')
+			->filter('group_id', 'IN', $ids)
+			->all()
+			->delete();
 	}
 
 	/**
@@ -75,48 +73,43 @@ class DbTemplates
 	}
 
 	/**
-	 * Delete templates (update to use EE Model when EllisLab fixes the model)
+	 * Delete templates
 	 *
 	 * @param int|array $ids
 	 */
 	public function deleteTemplates($ids)
 	{
-		ee()->db->where_in('template_id', $ids);
-		ee()->db->delete('templates');
+		ee('Model')->get('Template')
+			->filter('template_id', 'IN', $ids)
+			->all()
+			->delete();
 	}
 
 	/**
-	 * Update templates (update to use EE Model when EllisLab fixes the model)
+	 * Update templates
 	 *
 	 * @param array $updateData
 	 */
 	public function updateTemplates($updateData)
 	{
-		ee()->db->update_batch('templates', $updateData, 'template_id');
-	}
+		$templates = ee('Model')->get('Template')->all();
 
-	/**
-	 * Temporary function to get templates for template groups
-	 *
-	 * @param $templateGroups
-	 * @return array
-	 */
-	private function attachTemplates($templateGroups)
-	{
-		$templates = ee()->db->select(array(
-				'template_id',
-				'group_id',
-				'template_name',
-				'template_type'
-			))
-			->from('templates')
-			->get()
-			->result_array();
+		$idMap = array();
 
-		foreach ($templates as $template) {
-			$templateGroups[$template['group_id']]['templates'][$template['template_id']] = $template;
+		foreach ($templates as $key => $val) {
+			$idMap[$val->template_id] = $key;
 		}
 
-		return $templateGroups;
+		foreach ($updateData as $data) {
+			$tId = $idMap[$data['template_id']];
+
+			unset($data['template_id']);
+
+			foreach ($data as $dKey => $dVal) {
+				$templates[$tId]->{$dKey} = $dVal;
+			}
+		}
+
+		$templates->save();
 	}
 }
