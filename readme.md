@@ -8,6 +8,14 @@ ExpressionEngine has basic capability for files as templates, but if you delete 
 
 Template Sync is compatible ExpressionEngine 3.0.0. (please note it is not compatible with EE 2, see the legacy branch for EE 2). However it has not been tested in a production environment yet so you should test thoroughly and MAKE SURE YOU HAVE DATABASE BACKUPS!
 
+### Note
+
+The current version of ExpressionEngine (3.0.0) requires a patch in order to use this add-on which you can find here:
+
+https://support.ellislab.com/bugs/detail/21221
+
+The next release of 3.0.0 will fix this and should come out very soon.
+
 ## Installing
 
 EE2:
