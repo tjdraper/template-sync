@@ -1,4 +1,4 @@
-# Template Sync 1.0.0-b.5 for ExpressionEngine
+# Template Sync 1.0.0-b.6 for ExpressionEngine
 
 Make your file system (and version control!) the master of your templates in all ways. Also sync EE System templates, Template Partials, and Template Variables
 
