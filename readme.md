@@ -14,7 +14,7 @@ The current version of ExpressionEngine (3.0.0) requires a patch in order to use
 
 https://support.ellislab.com/bugs/detail/21221
 
-The next release of 3.0.0 will fix this and should come out very soon.
+The next release of EE 3 will fix this and should come out very soon.
 
 ## Installing
 
