@@ -72,15 +72,16 @@ class Template_sync_ext
 	public function sync()
 	{
 		// Check to see if we should be syncing templates
-		if ((defined('ENV') && ENV !== 'prod') || REQ === 'CP') {
-			// Check to see if template file syncing is turned on and config
-			// has not disabled template sync
-			if (ee()->config->item('save_tmpl_files') === 'y' &&
-				ee()->config->item('template_sync_disable_tmpl_sync') !== 'y'
-			) {
-				$templateSync = ee('template_sync:SyncTemplatesController');
+		if (
+			((defined('ENV') && ENV !== 'prod') || REQ === 'CP') &&
+			ee()->config->item('save_tmpl_files') === 'y'
+		) {
+			if (ee()->config->item('template_sync_disable_tmpl_sync') !== 'y') {
+				ee('template_sync:SyncTemplatesController')->run();
+			}
 
-				$templateSync->run();
+			if (ee()->config->item('template_sync_disable_spec_sync') !== 'y') {
+				ee('template_sync:SyncSpecTemplatesController')->run();
 			}
 		}
 	}

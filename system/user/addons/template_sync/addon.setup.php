@@ -12,11 +12,14 @@ return array(
 	'services' => array(
 		// Controllers
 		'SyncTemplatesController' => 'Controller\SyncTemplates',
+		'SyncSpecTemplatesController' => 'Controller\SyncSpecTemplates',
 
 		// Services
 		'FileTemplatesService' => 'Service\FileTemplates',
 		'DbTemplatesService' => 'Service\DbTemplates',
 		'TemplateCompareService' => 'Service\TemplateCompare',
+		'SpecFileTemplatesService' => 'Service\SpecFileTemplates',
+		'DbSpecTemplatesService' => 'Service\DbSpecTemplates',
 
 		// Libraries
 		'FileTemplateExtensionsLib' => 'Library\FileTemplateExtensions',
