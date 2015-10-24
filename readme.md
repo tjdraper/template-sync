@@ -18,8 +18,6 @@ The next release of EE 3 will fix this and should come out very soon.
 
 ## Installing
 
-EE2:
-
 - Move the `system/user/addons/template_sync` directory to the same path in your ExpressionEngine instance
 - Go to the Add-On manager in your EE control pane and install Template Sync
 
