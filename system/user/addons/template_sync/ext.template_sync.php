@@ -5,35 +5,40 @@
  *
  * @package template_sync
  * @author TJ Draper <tj@buzzingpixel.com>
- * @copyright Copyright (c) 2015, BuzzingPixel
+ * @link https://buzzingpixel.com/ee-add-ons/template-sync
+ * @copyright Copyright (c) 2016, BuzzingPixel
  */
+
+use BuzzingPixel\TemplateSync\Controller\Installer;
 
 class Template_sync_ext
 {
+	// Set the version for ExpressionEngine
 	public $version = TEMPLATE_SYNC_VER;
 
-	protected $info;
+	protected $appInfo;
 
 	public function __construct()
 	{
-		$this->info = ee('App')->get('template_sync');
+		$this->appInfo = ee('App')->get('template_sync');
 	}
 
 	/**
-	 * Activate extension
+	 * Install extension
 	 */
 	public function activate_extension()
 	{
-		$extension = ee('Model')->make('Extension');
+		$installer = new Installer($this->appInfo);
+		$installer->install();
+	}
 
-		$extension->set(array(
-			'class' => __CLASS__,
-			'method' => 'sync',
-			'hook' => 'sessions_start',
-			'version' => $this->info->getVersion()
-		));
-
-		$extension->save();
+	/**
+	 * Uninstall extension
+	 */
+	public function disable_extension()
+	{
+		$installer = new Installer($this->appInfo);
+		$installer->uninstall();
 	}
 
 	/**
@@ -41,29 +46,14 @@ class Template_sync_ext
 	 */
 	public function update_extension($current = '')
 	{
-		if ($current !== $this->info->getVersion()) {
-			$extension = ee('Model')->get('Extension')
-				->filter('class', __CLASS__)
-				->all();
-
-			$extension->version = $this->info->getVersion();
-
-			$extension->save();
+		if ($current ===  $this->appInfo->getVersion()) {
+			return false;
 		}
 
-		return false;
-	}
+		$installer = new Installer($this->appInfo);
+		$installer->generalUpdate();
 
-	/**
-	 * Remove extension
-	 */
-	public function disable_extension()
-	{
-		$extension = ee('Model')->get('Extension')
-			->filter('class', __CLASS__)
-			->all();
-
-		$extension->delete();
+		return true;
 	}
 
 	/**
@@ -72,21 +62,21 @@ class Template_sync_ext
 	public function sync()
 	{
 		// Check to see if we should be syncing templates
-		if (
-			((defined('ENV') && ENV !== 'prod') || REQ === 'CP') &&
-			ee()->config->item('save_tmpl_files') === 'y'
-		) {
-			if (ee()->config->item('template_sync_disable_tmpl_sync') !== 'y') {
-				ee('template_sync:SyncTemplatesController')->run();
-			}
+		// if (
+		// 	((defined('ENV') && ENV !== 'prod') || REQ === 'CP') &&
+		// 	ee()->config->item('save_tmpl_files') === 'y'
+		// ) {
+		// 	if (ee()->config->item('template_sync_disable_tmpl_sync') !== 'y') {
+		// 		ee('template_sync:SyncTemplatesController')->run();
+		// 	}
 
-			if (ee()->config->item('template_sync_disable_spec_sync') !== 'y') {
-				ee('template_sync:SyncSpecTemplatesController')->run();
-			}
+		// 	if (ee()->config->item('template_sync_disable_spec_sync') !== 'y') {
+		// 		ee('template_sync:SyncSpecTemplatesController')->run();
+		// 	}
 
-			if (ee()->config->item('template_sync_disable_partial_sync') !== 'y') {
-				ee('template_sync:SyncPartialsController')->run();
-			}
-		}
+		// 	if (ee()->config->item('template_sync_disable_partial_sync') !== 'y') {
+		// 		ee('template_sync:SyncPartialsController')->run();
+		// 	}
+		// }
 	}
 }
