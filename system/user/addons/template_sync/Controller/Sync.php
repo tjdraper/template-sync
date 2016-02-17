@@ -11,6 +11,9 @@
 
 namespace BuzzingPixel\TemplateSync\Controller;
 
+use BuzzingPixel\TemplateSync\Service\Data\FileSpecTemplates;
+use BuzzingPixel\TemplateSync\Service\Data\DbSpecTemplates;
+use BuzzingPixel\TemplateSync\Service\SyncSpecTemplates;
 use BuzzingPixel\TemplateSync\Service\Data\FileTemplates;
 use BuzzingPixel\TemplateSync\Service\FileTemplateIndexes;
 use BuzzingPixel\TemplateSync\Service\Data\DbTemplates;
@@ -40,6 +43,13 @@ class Sync
 	 */
 	public function run()
 	{
+		// Sync specialty templates
+		$syncSpecTemplates = new SyncSpecTemplates(
+			new FileSpecTemplates(),
+			new DbSpecTemplates()
+		);
+		$syncSpecTemplates->sync();
+
 		// Get the file templates
 		$fileTemplates = new FileTemplates();
 
