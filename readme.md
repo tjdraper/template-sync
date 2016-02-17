@@ -1,20 +1,12 @@
-# Template Sync 1.0.0-b.6 for ExpressionEngine
+# Template Sync 1.0.0-b.7 for ExpressionEngine
 
-Make your file system (and version control!) the master of your templates in all ways. Also sync EE System templates, Template Partials, and Template Variables
+Make your file system (and version control!) the master of your templates in all ways. Additionally, sync ExpressionEngine system speciality templates with the file system.
 
-ExpressionEngine has basic capability for files as templates, but if you delete a template file from the file system it is not deleted from EE, or if you change the file extension, it does not change the template type in EE. This extension fixes both of those issues. And EE does not sync System templates, Template Partials, or Template Variables with the file system at all natively. So this extension fixes that issue too.
+ExpressionEngine has basic capability for templates, template partials, and template variables as files, but if you delete a template, template partial, or template variable file from the file system it is not deleted from EE. Or if you change a template's file extension, it does not change the template type in EE. ExpressionEngine also does not sync System Specialty Templates with the file system. The Template Sync add-on fixes all of these issues.
 
 ## Compatibility
 
-Template Sync is compatible ExpressionEngine 3.0.0. (please note it is not compatible with EE 2, see the legacy branch for EE 2). However it has not been tested in a production environment yet so you should test thoroughly and MAKE SURE YOU HAVE DATABASE BACKUPS!
-
-### Note
-
-The current version of ExpressionEngine (3.0.0) requires a patch in order to use this add-on which you can find here:
-
-https://support.ellislab.com/bugs/detail/21221
-
-The next release of EE 3 will fix this and should come out very soon.
+Template Sync is compatible ExpressionEngine 3.1.0 or greater. (please note it is not compatible with EE 2, see the legacy branch for EE 2). However it has not been tested in a production environment yet so you should test thoroughly and MAKE SURE YOU HAVE DATABASE BACKUPS!
 
 ## Installing
 
