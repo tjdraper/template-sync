@@ -12,6 +12,7 @@
 namespace BuzzingPixel\TemplateSync\Controller;
 
 use BuzzingPixel\TemplateSync\Service\Data\FileTemplates;
+use BuzzingPixel\TemplateSync\Service\FileTemplateIndexes;
 use BuzzingPixel\TemplateSync\Service\Data\DbTemplates;
 use BuzzingPixel\TemplateSync\Service\SyncPartials;
 use BuzzingPixel\TemplateSync\Service\SyncVariables;
@@ -27,7 +28,10 @@ class Sync
 	 *
 	 * @param $appInfo The extension provider object
 	 */
-	public function __construct(\EllisLab\ExpressionEngine\Core\Provider $appInfo) {
+	public function __construct(
+		\EllisLab\ExpressionEngine\Core\Provider $appInfo
+	)
+	{
 		$this->appInfo = $appInfo;
 	}
 
@@ -38,6 +42,10 @@ class Sync
 	{
 		// Get the file templates
 		$fileTemplates = new FileTemplates();
+
+		// Write index files if necesary
+		$fileTemplateIndexes = new FileTemplateIndexes($fileTemplates);
+		$fileTemplateIndexes->write();
 
 		// Get the DB templates
 		$dbTemplates = new DbTemplates();

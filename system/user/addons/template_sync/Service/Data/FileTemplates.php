@@ -53,6 +53,13 @@ class FileTemplates extends Base
 			// Get the templates in this group
 			$templates = DirArray::files($path . $group);
 
+			// Make sure there is an index template
+			if ($name !== '_partials' && $name !== '_variables') {
+				if (! in_array('index.html', $templates)) {
+					$templates[] = 'index.html';
+				}
+			}
+
 			// Process the templates
 			foreach ($templates as $template) {
 				$templatePathInf = pathinfo($template);
