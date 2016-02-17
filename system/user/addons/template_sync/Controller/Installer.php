@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Template Sync extension
+ * Template Sync Installer Controller
  *
  * @package template_sync
  * @author TJ Draper <tj@buzzingpixel.com>
