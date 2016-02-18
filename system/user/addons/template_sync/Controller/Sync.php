@@ -72,11 +72,15 @@ class Sync
 
 			// Sync variables
 			} elseif ($dbTemplateKey === '_variables') {
-				$syncVariables = new SyncVariables(
-					$fileTemplates->{$dbTemplateKey},
-					$dbTemplateGroup
-				);
-				$syncVariables->sync();
+				// Make sure this is not a Low Variables page, because we can
+				// really screw up Low Variables
+				if (! in_array('low_variables', ee()->uri->segments)) {
+					$syncVariables = new SyncVariables(
+						$fileTemplates->{$dbTemplateKey},
+						$dbTemplateGroup
+					);
+					$syncVariables->sync();
+				}
 
 			// Sync template groups and templates
 			} else {
