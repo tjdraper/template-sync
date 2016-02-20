@@ -49,7 +49,7 @@ class Installer
 	public function uninstall()
 	{
 		$extension = ee('Model')->get('Extension')
-			->filter('class', __CLASS__)
+			->filter('class', 'Template_sync_ext')
 			->all();
 
 		$extension->delete();
@@ -61,7 +61,7 @@ class Installer
 	public function generalUpdate()
 	{
 		$extension = ee('Model')->get('Extension')
-			->filter('class', __CLASS__)
+			->filter('class', 'Template_sync_ext')
 			->all();
 
 		$extension->version = $this->appInfo->getVersion();

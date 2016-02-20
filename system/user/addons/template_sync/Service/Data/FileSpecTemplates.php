@@ -40,7 +40,7 @@ class FileSpecTemplates extends Base
 		// Get the spec template files
 		$templates = DirArray::files($path);
 
-		// Start a finel templates array
+		// Start a final templates array
 		$finalFileTemplates = array();
 
 		foreach ($templates as $template) {
