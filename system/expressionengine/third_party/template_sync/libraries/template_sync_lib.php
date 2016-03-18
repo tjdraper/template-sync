@@ -55,7 +55,8 @@ class Template_sync_lib
 
 		foreach ($templateGroups as $templateGroup) {
 			// Get the name of the template group
-			$templateGroupName = rtrim($templateGroup, '.group');
+			$pathInf = pathinfo($templateGroup);
+			$templateGroupName = $pathInf['filename'];
 
 			// Write an index template if it does not exist
 			if (! file_exists($path . $templateGroup . '/index.html')) {
