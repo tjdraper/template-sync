@@ -28,7 +28,7 @@ class FileSpecTemplates extends Base
 		// Check if the directory exists
 		if (! is_dir($path)) {
 			// Make sure PHP can write file permissions
-			$oldmask = umask(0);
+			$oldmask = umask(0000);
 
 			// Create the directory
 			mkdir($path, 0777);

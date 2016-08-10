@@ -44,7 +44,10 @@ class FileTemplateIndexes
 			$file = $path . $key . '.group/index.html';
 
 			if (! file_exists($file)) {
+				$oldUmask = umask(0000);
 				file_put_contents($file, '{redirect="404"}');
+				chmod($file, 0777);
+				umask($oldUmask);
 			}
 		}
 	}

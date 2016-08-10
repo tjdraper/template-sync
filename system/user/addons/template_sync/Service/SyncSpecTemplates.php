@@ -56,11 +56,16 @@ class SyncSpecTemplates
 				// Add the template content
 				$content .= "{$dbVal->template_data}\n";
 
+				$oldUmask = umask(0000);
+
 				// Write template contents to file
 				file_put_contents(
 					$path . $dbKey . '.html',
 					$content
 				);
+
+				chmod($path . $dbKey . '.html', 0777);
+				umask($oldUmask);
 
 				// Move on to the next template
 				continue;
