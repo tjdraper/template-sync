@@ -53,7 +53,7 @@ class Sync
 		// Get the file templates
 		$fileTemplates = new FileTemplates();
 
-		// Write index files if necesary
+		// Write index files if necessary
 		$fileTemplateIndexes = new FileTemplateIndexes($fileTemplates);
 		$fileTemplateIndexes->write();
 
