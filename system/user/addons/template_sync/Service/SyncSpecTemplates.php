@@ -11,6 +11,9 @@
 
 namespace BuzzingPixel\TemplateSync\Service;
 
+use BuzzingPixel\TemplateSync\Service\Data\FileSpecTemplates;
+use BuzzingPixel\TemplateSync\Service\Data\DbSpecTemplates;
+
 class SyncSpecTemplates
 {
 	private $fileSpecTemplates;
@@ -19,12 +22,12 @@ class SyncSpecTemplates
 	/**
 	 * SyncSpecTemplates constructor
 	 *
-	 * @param object $fileSpecTemplates
-	 * @param object $dbSpecTemplates
+	 * @param \BuzzingPixel\TemplateSync\Service\Data\FileSpecTemplates $fileSpecTemplates
+	 * @param \BuzzingPixel\TemplateSync\Service\Data\DbSpecTemplates $dbSpecTemplates
 	 */
 	public function __construct(
-		\BuzzingPixel\TemplateSync\Service\Data\FileSpecTemplates $fileSpecTemplates,
-		\BuzzingPixel\TemplateSync\Service\Data\DbSpecTemplates $dbSpecTemplates
+		FileSpecTemplates $fileSpecTemplates,
+		DbSpecTemplates $dbSpecTemplates
 	)
 	{
 		$this->fileSpecTemplates = $fileSpecTemplates;
