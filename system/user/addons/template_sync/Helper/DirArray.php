@@ -42,7 +42,7 @@ class DirArray
 		// Get the contents of the directory as an array
 		$content = DirArray::get($path);
 
-		$returnContent = [];
+		$returnContent = array();
 
 		// Go through each item and make sure it's a file before adding it
 		// to the return items
@@ -69,7 +69,7 @@ class DirArray
 		// Get the contents of the directory as an array
 		$content = DirArray::get($path);
 
-		$returnContent = [];
+		$returnContent = array();
 
 		// Go through each item and make sure it's a directory before adding it
 		// to the return items
