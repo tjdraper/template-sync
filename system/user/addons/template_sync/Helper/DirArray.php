@@ -86,6 +86,7 @@ class DirArray
 	 * Get
 	 *
 	 * @param string $path
+	 * @return array
 	 */
 	private static function get($path)
 	{
@@ -94,18 +95,22 @@ class DirArray
 			return array();
 		}
 
-		// Get the contents of the directory as an array
-		$contents = scandir($path);
+		// Get files in directory
+		$contents = array();
+		if ($handle = opendir($path)) {
+			while (false !== ($entry = readdir($handle))) {
+				$contents[] = $entry;
+			}
+		}
 
-		// Unset the . and ..
-		unset($contents[0]);
-		unset($contents[1]);
+		// Remove . and ..
+		$contents = array_diff($contents, array('.', '..'));
 
-		$returnContent = [];
-
-		// Make sure there are no hidden files here
+		// Make sure the file has a file extension
+		$returnContent = array();
 		foreach ($contents as $content) {
-			if (strpos($content, '.') !== 0) {
+			$pathinfo = pathinfo($content);
+			if ($pathinfo['filename']) {
 				$returnContent[] = $content;
 			}
 		}
