@@ -67,7 +67,7 @@ class SyncSpecTemplates
 					$content
 				);
 
-				chmod($path . $dbKey . '.html', 0777);
+				chmod($path . $dbKey . '.html', FILE_WRITE_MODE);
 				umask($oldUmask);
 
 				// Move on to the next template

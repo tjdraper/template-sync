@@ -46,7 +46,7 @@ class FileTemplateIndexes
 			if (! file_exists($file)) {
 				$oldUmask = umask(0000);
 				file_put_contents($file, '{redirect="404"}');
-				chmod($file, 0777);
+				chmod($file, FILE_WRITE_MODE);
 				umask($oldUmask);
 			}
 		}

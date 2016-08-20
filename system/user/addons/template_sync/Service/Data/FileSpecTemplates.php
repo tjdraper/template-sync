@@ -31,7 +31,7 @@ class FileSpecTemplates extends Base
 			$oldmask = umask(0000);
 
 			// Create the directory
-			mkdir($path, 0777);
+			mkdir($path, DIR_WRITE_MODE);
 
 			// Reset the umask
 			umask($oldmask);
