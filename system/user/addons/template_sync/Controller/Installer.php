@@ -19,9 +19,10 @@ class Installer
 	/**
 	 * Installer constructor
 	 *
-	 * @param $appInfo The extension provider object
+	 * @param \EllisLab\ExpressionEngine\Core\Provider $appInfo The extension provider object
 	 */
-	public function __construct(\EllisLab\ExpressionEngine\Core\Provider $appInfo) {
+	public function __construct(\EllisLab\ExpressionEngine\Core\Provider $appInfo)
+	{
 		$this->appInfo = $appInfo;
 	}
 
@@ -35,7 +36,7 @@ class Installer
 		$extension->set(array(
 			'class' => 'Template_sync_ext',
 			'method' => 'sync',
-			'hook' => 'sessions_start',
+			'hook' => 'core_boot',
 			'settings' => '',
 			'version' => $this->appInfo->getVersion()
 		));
@@ -65,6 +66,20 @@ class Installer
 			->all();
 
 		$extension->version = $this->appInfo->getVersion();
+
+		$extension->save();
+	}
+
+	/**
+	 * Switch to core_boot hook
+	 */
+	public function switchToCoreBoot()
+	{
+		$extension = ee('Model')->get('Extension')
+			->filter('class', 'Template_sync_ext')
+			->first();
+
+		$extension->hook = 'core_boot';
 
 		$extension->save();
 	}

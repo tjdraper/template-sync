@@ -1,6 +1,6 @@
 <?php
 
-defined('TEMPLATE_SYNC_VER') || define('TEMPLATE_SYNC_VER', '1.0.2');
+defined('TEMPLATE_SYNC_VER') || define('TEMPLATE_SYNC_VER', '1.1.0');
 
 return array(
 	'name' => 'Template Sync',

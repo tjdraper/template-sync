@@ -51,17 +51,34 @@ class Template_sync_ext
 			return false;
 		}
 
+		// Get the installer
 		$installer = new Installer($this->appInfo);
+
+		// Check version
+		if (version_compare($current, '1.1.0', '<')) {
+			$installer->switchToCoreBoot();
+		}
+
+		// Run general update routines
 		$installer->generalUpdate();
 
+		// We're done here
 		return true;
 	}
 
 	/**
 	 * Sync templates (sessions_start)
+	 *
+	 * @param object $isSession
 	 */
-	public function sync()
+	public function sync($isSession = null)
 	{
+		// If we are being passed a session object, we're on the wrong hook
+		// and we’ll throw errors so we shouldn’t do that
+		if ($isSession) {
+			return;
+		}
+
 		// Check to see if we should be syncing templates
 		if (
 			((defined('ENV') && ENV !== 'prod') || REQ === 'CP') &&
