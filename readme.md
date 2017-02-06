@@ -1,4 +1,4 @@
-# Template Sync 1.0.0 for ExpressionEngine 3
+# Template Sync for ExpressionEngine 3
 
 Make your file system (and version control!) the master of your templates in all ways. Additionally, sync ExpressionEngine system speciality templates with the file system.
 
@@ -8,7 +8,7 @@ Documentation is avaialable at https://buzzingpixel.com/ee-add-ons/template-sync
 
 ## License
 
-Copyright 2016 TJ Draper, BuzzingPixel, LLC
+Copyright 2017 TJ Draper, BuzzingPixel, LLC
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
