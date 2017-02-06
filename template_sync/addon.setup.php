@@ -1,12 +1,23 @@
-<?php
+<?php // @codingStandardsIgnoreStart
 
-defined('TEMPLATE_SYNC_VER') || define('TEMPLATE_SYNC_VER', '1.1.0');
+// @codingStandardsIgnoreEnd
+
+// Get addon json path
+$addonJsonPath = realpath(dirname(__FILE__));
+$addonJsonPath .= '/addon.json';
+
+// Get the addon json file
+$addonJson = json_decode(file_get_contents($addonJsonPath));
+
+defined('TEMPLATE_SYNC_VER') || define('TEMPLATE_SYNC_VER', $addonJson->version);
 
 return array(
-	'name' => 'Template Sync',
-	'version' => TEMPLATE_SYNC_VER,
-	'author' => 'TJ Draper',
-	'author_url' => 'https://buzzingpixel.com',
-	'description' => 'Provide full, two way sync for templates, template variables, and template partials in the database and filesystem',
-	'namespace' => 'BuzzingPixel\TemplateSync'
+	'author' => $addonJson->author,
+	'author_url' => $addonJson->authorUrl,
+	'description' => $addonJson->description,
+	'docs_url' => $addonJson->docsUrl,
+	'name' => $addonJson->label,
+	'namespace' => $addonJson->namespace,
+	'settings_exist' => $addonJson->settingsExist,
+	'version' => $addonJson->version,
 );

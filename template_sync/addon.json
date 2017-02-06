@@ -1,0 +1,13 @@
+{
+	"author": "TJ Draper",
+	"authorUrl": "https://buzzingpixel.com",
+	"bugs": "http://support.buzzingpixel.com",
+	"description": "Provide full, two way sync for templates, template variables, and template partials in the database and filesystem",
+	"docsUrl": "https://buzzingpixel.com/software/template-sync/documentation",
+	"homepage": "https://buzzingpixel.com/software/template-sync",
+	"label": "Template Sync",
+	"name": "template_sync",
+	"namespace": "BuzzingPixel\\TemplateSync",
+	"settingsExist": false,
+	"version": "1.1.1"
+}
