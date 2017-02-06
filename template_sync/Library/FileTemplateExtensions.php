@@ -19,6 +19,7 @@ class FileTemplateExtensions
 		'html' => 'webpage',
 		'js' => 'js',
 		'rss' => 'feed',
+		'feed' => 'feed',
 		'xml' => 'xml'
 	);
 
