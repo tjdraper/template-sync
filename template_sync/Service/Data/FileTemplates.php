@@ -55,7 +55,19 @@ class FileTemplates extends Base
 
 			// Make sure there is an index template
 			if ($name !== '_partials' && $name !== '_variables') {
-				if (! in_array('index.html', $templates)) {
+				// Start by assuming index template does not exist
+				$indexTemplateExists = false;
+
+				// Now find out if it does
+				foreach ($fileExtensions as $ext) {
+					if (in_array("index.{$ext}", $templates)) {
+						$indexTemplateExists = true;
+						break;
+					}
+				}
+
+				// If index template does not exist
+				if (! $indexTemplateExists) {
 					$templates[] = 'index.html';
 				}
 			}

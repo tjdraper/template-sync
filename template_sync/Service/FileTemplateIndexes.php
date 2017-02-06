@@ -11,6 +11,8 @@
 
 namespace BuzzingPixel\TemplateSync\Service;
 
+use BuzzingPixel\TemplateSync\Library\FileTemplateExtensions;
+
 class FileTemplateIndexes
 {
 	private $fileTemplates;
@@ -41,9 +43,23 @@ class FileTemplateIndexes
 				continue;
 			}
 
-			$file = $path . $key . '.group/index.html';
+			// Get file extensions
+			$fileExtensions = FileTemplateExtensions::getExtensions();
 
-			if (! file_exists($file)) {
+			// Start by assuming file does not exist
+			$indexFileExists = false;
+
+			// Iterate through file extensions
+			foreach ($fileExtensions as $ext) {
+				$file = "{$path}{$key}.group/index.{$ext}";
+
+				if (file_exists($file)) {
+					$indexFileExists = true;
+					break;
+				}
+			}
+
+			if (! $indexFileExists) {
 				$oldUmask = umask(0000);
 				file_put_contents($file, '{redirect="404"}');
 				chmod($file, FILE_WRITE_MODE);
