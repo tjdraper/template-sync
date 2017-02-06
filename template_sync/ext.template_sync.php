@@ -1,24 +1,36 @@
-<?php if (! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
 
-/**
- * Template Sync extension
- *
- * @package template_sync
- * @author TJ Draper <tj@buzzingpixel.com>
- * @link https://buzzingpixel.com/ee-add-ons/template-sync
- * @copyright Copyright (c) 2016, BuzzingPixel
- */
-
+use EllisLab\ExpressionEngine\Core\Provider as EEProvider;
 use BuzzingPixel\TemplateSync\Controller\Installer;
 use BuzzingPixel\TemplateSync\Controller\Sync;
 
+/**
+ * Class Template_sync_ext
+ *
+ * @author TJ Draper <tj@buzzingpixel.com>
+ * @link https://buzzingpixel.com/software/template-sync
+ * @copyright Copyright (c) 2017, BuzzingPixel, LLC
+ *
+ * @SuppressWarnings(PHPMD.CamelCaseClassName)
+ * @SuppressWarnings(PHPMD.CamelCaseMethodName)
+ */
+// @codingStandardsIgnoreStart
 class Template_sync_ext
+// @codingStandardsIgnoreEnd
 {
-	// Set the version for ExpressionEngine
+	/**
+	 * @var string $version
+	 */
 	public $version = TEMPLATE_SYNC_VER;
 
+	/**
+	 * @var EEProvider $appInfo
+	 */
 	protected $appInfo;
 
+	/**
+	 * Constructor
+	 */
 	public function __construct()
 	{
 		$this->appInfo = ee('App')->get('template_sync');
@@ -27,7 +39,8 @@ class Template_sync_ext
 	/**
 	 * Install extension
 	 */
-	public function activate_extension()
+	// @codingStandardsIgnoreStart
+	public function activate_extension() // @codingStandardsIgnoreEnd
 	{
 		$installer = new Installer($this->appInfo);
 		$installer->install();
@@ -36,7 +49,8 @@ class Template_sync_ext
 	/**
 	 * Uninstall extension
 	 */
-	public function disable_extension()
+	// @codingStandardsIgnoreStart
+	public function disable_extension() // @codingStandardsIgnoreEnd
 	{
 		$installer = new Installer($this->appInfo);
 		$installer->uninstall();
@@ -44,8 +58,12 @@ class Template_sync_ext
 
 	/**
 	 * Update extension
+	 *
+	 * @param string $current
+	 * @return bool
 	 */
-	public function update_extension($current = '')
+	// @codingStandardsIgnoreStart
+	public function update_extension($current = '') // @codingStandardsIgnoreEnd
 	{
 		if ($current ===  $this->appInfo->getVersion()) {
 			return false;
@@ -80,8 +98,7 @@ class Template_sync_ext
 		}
 
 		// Check to see if we should be syncing templates
-		if (
-			((defined('ENV') && ENV !== 'prod') || REQ === 'CP') &&
+		if (((defined('ENV') && ENV !== 'prod') || REQ === 'CP') &&
 			ee()->config->item('save_tmpl_files') === 'y'
 		) {
 			$sync = new Sync($this->appInfo);

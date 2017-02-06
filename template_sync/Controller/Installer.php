@@ -1,16 +1,17 @@
 <?php
 
-/**
- * Template Sync Installer Controller
- *
- * @package template_sync
- * @author TJ Draper <tj@buzzingpixel.com>
- * @link https://buzzingpixel.com/ee-add-ons/template-sync
- * @copyright Copyright (c) 2016, BuzzingPixel
- */
-
 namespace BuzzingPixel\TemplateSync\Controller;
 
+use EllisLab\ExpressionEngine\Core\Provider as EEProvider;
+use EllisLab\ExpressionEngine\Model\Addon\Extension as ExtensionRecord;
+
+/**
+ * Class Installer
+ *
+ * @author TJ Draper <tj@buzzingpixel.com>
+ * @link https://buzzingpixel.com/software/template-sync
+ * @copyright Copyright (c) 2017, BuzzingPixel, LLC
+ */
 class Installer
 {
 	// EE App Info
@@ -19,9 +20,9 @@ class Installer
 	/**
 	 * Installer constructor
 	 *
-	 * @param \EllisLab\ExpressionEngine\Core\Provider $appInfo The extension provider object
+	 * @param EEProvider $appInfo The extension provider object
 	 */
-	public function __construct(\EllisLab\ExpressionEngine\Core\Provider $appInfo)
+	public function __construct(EEProvider $appInfo)
 	{
 		$this->appInfo = $appInfo;
 	}
@@ -31,9 +32,10 @@ class Installer
 	 */
 	public function install()
 	{
-		$extension = ee('Model')->make('Extension');
+		/** @var ExtensionRecord $extensionRecord */
+		$extensionRecord = ee('Model')->make('Extension');
 
-		$extension->set(array(
+		$extensionRecord->set(array(
 			'class' => 'Template_sync_ext',
 			'method' => 'sync',
 			'hook' => 'core_boot',
@@ -41,7 +43,7 @@ class Installer
 			'version' => $this->appInfo->getVersion()
 		));
 
-		$extension->save();
+		$extensionRecord->save();
 	}
 
 	/**
@@ -49,11 +51,12 @@ class Installer
 	 */
 	public function uninstall()
 	{
-		$extension = ee('Model')->get('Extension')
+		/** @var ExtensionRecord $extensionRecord */
+		$extensionRecord = ee('Model')->get('Extension')
 			->filter('class', 'Template_sync_ext')
 			->all();
 
-		$extension->delete();
+		$extensionRecord->delete();
 	}
 
 	/**
@@ -61,13 +64,14 @@ class Installer
 	 */
 	public function generalUpdate()
 	{
-		$extension = ee('Model')->get('Extension')
+		/** @var ExtensionRecord $extensionRecord */
+		$extensionRecord = ee('Model')->get('Extension')
 			->filter('class', 'Template_sync_ext')
 			->all();
 
-		$extension->version = $this->appInfo->getVersion();
+		$extensionRecord->setProperty('version', $this->appInfo->getVersion());
 
-		$extension->save();
+		$extensionRecord->save();
 	}
 
 	/**
@@ -75,12 +79,13 @@ class Installer
 	 */
 	public function switchToCoreBoot()
 	{
-		$extension = ee('Model')->get('Extension')
+		/** @var ExtensionRecord $extensionRecord */
+		$extensionRecord = ee('Model')->get('Extension')
 			->filter('class', 'Template_sync_ext')
 			->first();
 
-		$extension->hook = 'core_boot';
+		$extensionRecord->setProperty('hook', 'core_boot');
 
-		$extension->save();
+		$extensionRecord->save();
 	}
 }

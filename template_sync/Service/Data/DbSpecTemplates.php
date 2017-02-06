@@ -1,18 +1,19 @@
 <?php
 
-/**
- * Template Sync DbSpecTemplates Service
- *
- * @package template_sync
- * @author TJ Draper <tj@buzzingpixel.com>
- * @link https://buzzingpixel.com/ee-add-ons/template-sync
- * @copyright Copyright (c) 2016, BuzzingPixel
- */
-
 namespace BuzzingPixel\TemplateSync\Service\Data;
 
+/**
+ * Class DbSpecTemplates
+ *
+ * @author TJ Draper <tj@buzzingpixel.com>
+ * @link https://buzzingpixel.com/software/template-sync
+ * @copyright Copyright (c) 2017, BuzzingPixel, LLC
+ */
 class DbSpecTemplates extends Base
 {
+	/**
+	 * Constructor
+	 */
 	public function __construct()
 	{
 		// Get specialty templates

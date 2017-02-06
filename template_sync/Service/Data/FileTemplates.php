@@ -1,19 +1,20 @@
 <?php
 
-/**
- * Template Sync FileTemplates Service
- *
- * @package template_sync
- * @author TJ Draper <tj@buzzingpixel.com>
- * @link https://buzzingpixel.com/ee-add-ons/template-sync
- * @copyright Copyright (c) 2016, BuzzingPixel
- */
-
 namespace BuzzingPixel\TemplateSync\Service\Data;
 
 use BuzzingPixel\TemplateSync\Library\FileTemplateExtensions;
 use BuzzingPixel\TemplateSync\Helper\DirArray;
 
+/**
+ * Class FileTemplates
+ *
+ * @author TJ Draper <tj@buzzingpixel.com>
+ * @link https://buzzingpixel.com/software/template-sync
+ * @copyright Copyright (c) 2017, BuzzingPixel, LLC
+ *
+ * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+ * @SuppressWarnings(PHPMD.NPathComplexity)
+ */
 class FileTemplates extends Base
 {
 	/**
@@ -42,8 +43,7 @@ class FileTemplates extends Base
 			$ext = isset($pathInf['extension']) ? $pathInf['extension'] : false;
 
 			// Make sure .group is present, or _partials or _variables
-			if (
-				$ext !== 'group' &&
+			if ($ext !== 'group' &&
 				$group !== '_partials' &&
 				$group !== '_variables'
 			) {

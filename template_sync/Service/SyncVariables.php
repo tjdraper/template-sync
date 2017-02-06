@@ -1,16 +1,14 @@
 <?php
 
-/**
- * SyncVariables service
- *
- * @package template_sync
- * @author TJ Draper <tj@buzzingpixel.com>
- * @link https://buzzingpixel.com/ee-add-ons/template-sync
- * @copyright Copyright (c) 2016, BuzzingPixel
- */
-
 namespace BuzzingPixel\TemplateSync\Service;
 
+/**
+ * Class SyncVariables
+ *
+ * @author TJ Draper <tj@buzzingpixel.com>
+ * @link https://buzzingpixel.com/software/template-sync
+ * @copyright Copyright (c) 2017, BuzzingPixel, LLC
+ */
 class SyncVariables
 {
 	private $fileVariables;
@@ -37,8 +35,7 @@ class SyncVariables
 		foreach ($this->dbVariables as $dbKey => $dbVal) {
 			// If the file does not exist, or does not have html extension
 			// Delete the DB partial
-			if (
-				! isset($this->fileVariables[$dbKey]) ||
+			if (! isset($this->fileVariables[$dbKey]) ||
 				$this->fileVariables[$dbKey]->extension !== 'html'
 			) {
 				$dbVal->delete();

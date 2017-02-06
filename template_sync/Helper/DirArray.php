@@ -1,16 +1,14 @@
 <?php
 
-/**
- * DirArray helper
- *
- * @package template_sync
- * @author TJ Draper <tj@buzzingpixel.com>
- * @link https://buzzingpixel.com/ee-add-ons/template-sync
- * @copyright Copyright (c) 2016, BuzzingPixel
- */
-
 namespace BuzzingPixel\TemplateSync\Helper;
 
+/**
+ * Class DirArray
+ *
+ * @author TJ Draper <tj@buzzingpixel.com>
+ * @link https://buzzingpixel.com/software/template-sync
+ * @copyright Copyright (c) 2017, BuzzingPixel, LLC
+ */
 class DirArray
 {
 	/**
@@ -97,7 +95,8 @@ class DirArray
 
 		// Get files in directory
 		$contents = array();
-		if ($handle = opendir($path)) {
+		$handle = opendir($path);
+		if ($handle) {
 			while (false !== ($entry = readdir($handle))) {
 				$contents[] = $entry;
 			}

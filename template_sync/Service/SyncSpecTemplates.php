@@ -1,19 +1,17 @@
 <?php
 
-/**
- * SyncSpecTemplates service
- *
- * @package template_sync
- * @author TJ Draper <tj@buzzingpixel.com>
- * @link https://buzzingpixel.com/ee-add-ons/template-sync
- * @copyright Copyright (c) 2016, BuzzingPixel
- */
-
 namespace BuzzingPixel\TemplateSync\Service;
 
 use BuzzingPixel\TemplateSync\Service\Data\FileSpecTemplates;
 use BuzzingPixel\TemplateSync\Service\Data\DbSpecTemplates;
 
+/**
+ * Class SyncSpecTemplates
+ *
+ * @author TJ Draper <tj@buzzingpixel.com>
+ * @link https://buzzingpixel.com/software/template-sync
+ * @copyright Copyright (c) 2017, BuzzingPixel, LLC
+ */
 class SyncSpecTemplates
 {
 	private $fileSpecTemplates;
@@ -22,14 +20,13 @@ class SyncSpecTemplates
 	/**
 	 * SyncSpecTemplates constructor
 	 *
-	 * @param \BuzzingPixel\TemplateSync\Service\Data\FileSpecTemplates $fileSpecTemplates
-	 * @param \BuzzingPixel\TemplateSync\Service\Data\DbSpecTemplates $dbSpecTemplates
+	 * @param FileSpecTemplates $fileSpecTemplates
+	 * @param DbSpecTemplates $dbSpecTemplates
 	 */
 	public function __construct(
 		FileSpecTemplates $fileSpecTemplates,
 		DbSpecTemplates $dbSpecTemplates
-	)
-	{
+	) {
 		$this->fileSpecTemplates = $fileSpecTemplates;
 		$this->dbSpecTemplates = $dbSpecTemplates;
 	}

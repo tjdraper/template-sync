@@ -1,30 +1,30 @@
 <?php
 
-/**
- * FileTemplateIndexes service
- *
- * @package template_sync
- * @author TJ Draper <tj@buzzingpixel.com>
- * @link https://buzzingpixel.com/ee-add-ons/template-sync
- * @copyright Copyright (c) 2016, BuzzingPixel
- */
-
 namespace BuzzingPixel\TemplateSync\Service;
 
 use BuzzingPixel\TemplateSync\Library\FileTemplateExtensions;
+use BuzzingPixel\TemplateSync\Service\Data\FileTemplates;
 
+/**
+ * Class FileTemplateIndexes
+ *
+ * @author TJ Draper <tj@buzzingpixel.com>
+ * @link https://buzzingpixel.com/software/template-sync
+ * @copyright Copyright (c) 2017, BuzzingPixel, LLC
+ */
 class FileTemplateIndexes
 {
+	/**
+	 * @var FileTemplates $fileTemplates
+	 */
 	private $fileTemplates;
 
 	/**
 	 * FileTemplateIndexes constructor
 	 *
-	 * @param object $fileTemplates
+	 * @param FileTemplates $fileTemplates
 	 */
-	public function __construct(
-		\BuzzingPixel\TemplateSync\Service\Data\FileTemplates $fileTemplates
-	)
+	public function __construct(FileTemplates $fileTemplates)
 	{
 		$this->fileTemplates = $fileTemplates;
 	}
@@ -60,6 +60,7 @@ class FileTemplateIndexes
 			}
 
 			if (! $indexFileExists) {
+				$file = "{$path}{$key}.group/index.html";
 				$oldUmask = umask(0000);
 				file_put_contents($file, '{redirect="404"}');
 				chmod($file, FILE_WRITE_MODE);

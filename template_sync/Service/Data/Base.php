@@ -1,18 +1,16 @@
 <?php
 
-/**
- * Template Sync FileTemplates Service
- *
- * @package template_sync
- * @author TJ Draper <tj@buzzingpixel.com>
- * @link https://buzzingpixel.com/ee-add-ons/template-sync
- * @copyright Copyright (c) 2016, BuzzingPixel
- */
-
 namespace BuzzingPixel\TemplateSync\Service\Data;
 
 use EllisLab\ExpressionEngine\Library\Data\Collection;
 
+/**
+ * Class Base
+ *
+ * @author TJ Draper <tj@buzzingpixel.com>
+ * @link https://buzzingpixel.com/software/template-sync
+ * @copyright Copyright (c) 2017, BuzzingPixel, LLC
+ */
 class Base
 {
 	protected $propertyTypes = array();
@@ -36,9 +34,9 @@ class Base
 	 * @param string $name Class variable name
 	 * @return mixed
 	 */
-	public function __get($name) {
-		if (
-			! isset($this->propertyTypes[$name]) ||
+	public function __get($name)
+	{
+		if (! isset($this->propertyTypes[$name]) ||
 			! isset($this->{$name})
 		) {
 			return null;

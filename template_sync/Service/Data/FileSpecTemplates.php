@@ -1,18 +1,16 @@
 <?php
 
-/**
- * Template Sync FileSpecTemplates Service
- *
- * @package template_sync
- * @author TJ Draper <tj@buzzingpixel.com>
- * @link https://buzzingpixel.com/ee-add-ons/template-sync
- * @copyright Copyright (c) 2016, BuzzingPixel
- */
-
 namespace BuzzingPixel\TemplateSync\Service\Data;
 
 use BuzzingPixel\TemplateSync\Helper\DirArray;
 
+/**
+ * Class FileSpecTemplates
+ *
+ * @author TJ Draper <tj@buzzingpixel.com>
+ * @link https://buzzingpixel.com/software/template-sync
+ * @copyright Copyright (c) 2017, BuzzingPixel, LLC
+ */
 class FileSpecTemplates extends Base
 {
 	/**

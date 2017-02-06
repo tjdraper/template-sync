@@ -2,6 +2,12 @@
 
 // @codingStandardsIgnoreEnd
 
+/**
+ * @author TJ Draper <tj@buzzingpixel.com>
+ * @link https://buzzingpixel.com/software/template-sync
+ * @copyright Copyright (c) 2017, BuzzingPixel, LLC
+ */
+
 // Get addon json path
 $addonJsonPath = realpath(dirname(__FILE__));
 $addonJsonPath .= '/addon.json';

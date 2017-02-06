@@ -1,19 +1,24 @@
 <?php
 
-/**
- * SyncPartials service
- *
- * @package template_sync
- * @author TJ Draper <tj@buzzingpixel.com>
- * @link https://buzzingpixel.com/ee-add-ons/template-sync
- * @copyright Copyright (c) 2016, BuzzingPixel
- */
-
 namespace BuzzingPixel\TemplateSync\Service;
 
+/**
+ * Class SyncPartials
+ *
+ * @author TJ Draper <tj@buzzingpixel.com>
+ * @link https://buzzingpixel.com/software/template-sync
+ * @copyright Copyright (c) 2017, BuzzingPixel, LLC
+ */
 class SyncPartials
 {
+	/**
+	 * @var array $filePartials
+	 */
 	private $filePartials;
+
+	/**
+	 * @var array $dbPartials
+	 */
 	private $dbPartials;
 
 	/**
@@ -37,8 +42,7 @@ class SyncPartials
 		foreach ($this->dbPartials as $dbKey => $dbVal) {
 			// If the file does not exist, or does not have html extension
 			// Delete the DB partial
-			if (
-				! isset($this->filePartials[$dbKey]) ||
+			if (! isset($this->filePartials[$dbKey]) ||
 				$this->filePartials[$dbKey]->extension !== 'html'
 			) {
 				$dbVal->delete();

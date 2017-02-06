@@ -1,16 +1,8 @@
 <?php
 
-/**
- * Template Sync Sync Controller
- *
- * @package template_sync
- * @author TJ Draper <tj@buzzingpixel.com>
- * @link https://buzzingpixel.com/ee-add-ons/template-sync
- * @copyright Copyright (c) 2016, BuzzingPixel
- */
-
 namespace BuzzingPixel\TemplateSync\Controller;
 
+use EllisLab\ExpressionEngine\Core\Provider as EEProvider;
 use BuzzingPixel\TemplateSync\Service\Data\FileSpecTemplates;
 use BuzzingPixel\TemplateSync\Service\Data\DbSpecTemplates;
 use BuzzingPixel\TemplateSync\Service\SyncSpecTemplates;
@@ -21,6 +13,13 @@ use BuzzingPixel\TemplateSync\Service\SyncPartials;
 use BuzzingPixel\TemplateSync\Service\SyncVariables;
 use BuzzingPixel\TemplateSync\Service\SyncTemplates;
 
+/**
+ * Class Sync
+ *
+ * @author TJ Draper <tj@buzzingpixel.com>
+ * @link https://buzzingpixel.com/software/template-sync
+ * @copyright Copyright (c) 2017, BuzzingPixel, LLC
+ */
 class Sync
 {
 	// EE App Info
@@ -29,11 +28,9 @@ class Sync
 	/**
 	 * Installer constructor
 	 *
-	 * @param $appInfo The extension provider object
+	 * @param EEProvider $appInfo The extension provider object
 	 */
-	public function __construct(
-		\EllisLab\ExpressionEngine\Core\Provider $appInfo
-	)
+	public function __construct(EEProvider $appInfo)
 	{
 		$this->appInfo = $appInfo;
 	}
