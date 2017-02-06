@@ -4,6 +4,11 @@
 
 libraries/ExpressionEngine/*
 !libraries/ExpressionEngine/about-this-directory.md
+!libraries/ExpressionEngine/system
+libraries/ExpressionEngine/system/ee/*
+libraries/ExpressionEngine/system/user/*
+!libraries/ExpressionEngine/system/user/config
+libraries/ExpressionEngine/system/user/config/license.key
 
 
 
