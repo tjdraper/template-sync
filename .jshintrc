@@ -1,0 +1,31 @@
+{
+	"-W065": true,
+	"browser": true,
+	"camelcase": true,
+	"curly": true,
+	"debug": true,
+	"devel": true,
+	"eqnull": true,
+	"es3": true,
+	"expr": true,
+	"immed": true,
+	"maxerr": 20,
+	"newcap": true,
+	"noempty": true,
+	"latedef": true,
+	"loopfunc": true,
+	"maxdepth": 5,
+	"maxparams": false,
+	"nonbsp": true,
+	"nonew": true,
+	"predef": {
+		"$": false,
+		"$r": false,
+		"define": false,
+		"module": false,
+		"require": false,
+		"Wee": false
+	},
+	"undef": true,
+	"unused": true
+}
